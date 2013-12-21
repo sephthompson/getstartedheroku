@@ -1,0 +1,55 @@
+body
+{
+	background: #FFFFFF url('images/bgbody.png') fixed center top repeat-x;
+	text-align: center;
+	padding: 0;
+}
+img.siteLogo
+{
+	display: block;
+	width: 400px;
+}
+span.siteFrame
+{
+	display: inline-block;
+	background: url('images/bgsite.png') center top repeat;
+	border: solid 1px #B4C8DC;
+	color: #74889C;
+	font-family: Trebuchet MS;
+	font-size: 17px;
+	text-align: left;
+	width: 950;
+	height: 1000;
+	padding: 16;
+}
+table
+{
+	background: url('images/bgtable.png') center top repeat-x;
+	border-collapse: separate;
+	empty-cells: show;
+	border: solid 1px #74889C;
+	color: #74889C;
+	text-align: left;
+	padding: 1;
+}
+table th
+{
+	border: solid 1px #74889C;
+	color: #74889C;
+	text-align: center;
+	margin: 1;
+	padding: 4;
+}
+table td
+{
+	border: solid 1px #74889C;
+	color: #74889C;
+	text-align: left;
+	margin: 1;
+	padding: 4;
+}
+a		{color: #5458BC;text-decoration: underline;}
+a:visited	{color: #5458BC;text-decoration: underline;}
+a:hover		{color: #9E342C;text-decoration: underline;}
+a:visited:hover	{color: #9E342C;text-decoration: underline;}
+a:active	{color: #9E342C;text-decoration: underline;}

@@ -1,0 +1,91 @@
+
+span.profileWrapper
+{
+	top: 0px;
+	left: 0px;
+	display: block;
+	min-width: 1000px;
+	width: 100%;
+}
+span.column
+{
+	position: absolute;
+	top: 0px;
+	display: inline-block;
+	background: transparent;
+	border: solid 0px #000000;
+	text-align: left;
+	vertical-align: top;
+	padding: 64px 0px 0px 0px;
+	margin: 0px;
+}
+span.left
+{
+	left: 0px;
+	border-right: solid 1px #5F9FCF;
+	padding-left: 100px;
+	width: 300px;
+	height: 100%;
+}
+span.right
+{
+	right: 0px;
+	border-left: solid 1px #5F9FCF;
+	font-size: 12px;
+	padding-right: 100px;
+	width: 300px;
+	height: 100%;
+}
+span.center
+{
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+}
+span.panelWrapper
+{
+	display: block;
+	padding: 6px;
+	width: 100%;
+	height: 100%;
+}
+
+span.break
+{
+	display: block;
+	border: solid 1px #5F9FCF;
+	border-width: 0px 0px 1px 0px;
+	color: #5F9FCF;
+	font-size: 12px;
+	font-weight: 900;
+	text-align: left;
+	padding: 0px 0px 0px 6px;
+	margin: 4px 0px 4px 0px;
+	width: 100%;
+}
+span.username
+{
+	display: block;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
+	font-size: 18px;
+	padding: 2px;
+}
+span.title
+{
+	display: block;
+	color: #3F3FBF;
+	font-size: 12px;
+	padding-left: 12px;
+}
+
+table.projectList
+{
+	color: #3F3FBF;
+	font-size: 12px;
+	width: 100%;
+}
+table.projectList td
+{
+	padding: 6px;
+}

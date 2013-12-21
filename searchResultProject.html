@@ -1,0 +1,16 @@
+<span class="searchResultProject">
+	<span class="projectTitle"><?php echo $row["title"]; ?></span>
+	<span class="projectDesc"><?php echo $row["description"]; ?></span>
+	<span class="projectPoster">By
+		<?php echo '<a href="?p=profile&user='.$poster["uuid"].'">'.$poster["username"].'</a>'; ?>
+		<?php echo date_format(date_create($row["date_posted"]), "Y-m-d"); ?>
+	</span>
+	<span class="tagSet">
+<?php if ($tags) {
+	foreach ($tags as $tag_id) {
+		$tag = $db->fetchOneRow("tags", "uuid", $tag_id["tag_id"]);
+		echo '<span>'.$tag["title"].'</span>';
+	}
+} ?>
+	</span>
+</span>

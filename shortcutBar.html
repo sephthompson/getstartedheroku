@@ -1,0 +1,36 @@
+
+<table class="shortcutBar">
+	<td>
+		<a href="index.php" style="float: left;">
+			<img src="<?php echo $STYLE_PATH; ?>/images/getStarted.png" style="vertical-align: middle; height: 48px;">
+		</a>
+	</td>
+	<td>
+		<span id="loginBar" style="display: none; float: right;">
+			<span class="roundBorder"><table class="roundCollapsed">
+				<tr>
+					<td>Username:<input class="clear" id="loginBarUser" type="text" maxlength="16" /></td>
+					<td>Password:<input class="clear" id="loginBarPass" type="password" maxlength="16" /></td>
+					<th>
+						<input type="button" class="clear" value="Login" onClick="requestLogin();" />
+						<img style="display: none;" height="16px" id="loginBarLoadingGif" src="<?php echo $STYLE_PATH; ?>/images/loading_large.gif" />
+					</th>
+				</tr>
+			</table></span>
+		</span>
+		<span id="welcomeBar" style="display: none; float: right;">
+			<span id="welcomeBarMessage"></span>
+			<span><a href="javascript:requestLogout();">Logout</a></span>
+			<span><a class="icon" style="background-image: url('<?php echo $STYLE_PATH; ?>/images/shortcuts.png');" href="javascript:showShortcutIcons();"></a></span>
+		</span>
+	</td>
+</table>
+
+<span id="shortcutIconsPanel" class="shortcutIconsPanel" style="top: 64px; right: 0px; display: none;">
+	<span><a class="icon" style="background-image: url('<?php echo $STYLE_PATH; ?>/images/search.png');" href="?p=search"></a></span>
+	<span><a class="icon" style="background-image: url('<?php echo $STYLE_PATH; ?>/images/messages.png');" href="?p=messages"></a></span>
+	<span><a class="icon" style="background-image: url('<?php echo $STYLE_PATH; ?>/images/dashboard.png');" href="?p=dashboard"></a></span>
+	<span><a class="icon" style="background-image: url('<?php echo $STYLE_PATH; ?>/images/config.png');" href="?p=config"></a></span>
+</span>
+
+<script src="shortcutIcons.js"></script>

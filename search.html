@@ -1,0 +1,70 @@
+<span class="tagSet tagHover" unselectable="on" id="tagHover"></span>
+
+<span class="searchProjectsWrapper">
+	<span class="filtersPanel" id="filters">
+		<span style="display: block; width: 100%; padding: 4px;">
+			<span class="collapsablePanel" style="width: 100%;">
+				<p1>Tags</p1>
+				<span>
+					<table class="clear innerBorders" style="width: 100%;">
+						<tr><td>
+							<input class="lite" style="width: 100%;" type="text" id="tagSearchBar" onkeydown="tagSearchChange();" onkeypress="tagSearchChange();" onblur="tagSearchBlur();" />
+							<br /><span class="searchGuessBar" style="width: inherit;" id="tagSearchBarGuess"></span>
+						</td></tr><tr><td>
+							<span class="tagTrashCan" onMouseOver="tagDeleteOver();" onMouseOut="tagDeleteOut();"></span>
+							<span class="tagSet" id="tagSet">&nbsp;</span>
+						</td></tr>
+					</table>
+				</span>
+			</span>
+		</span>
+		<span style="display: block; width: 100%; padding: 4px;">
+			<span class="collapsablePanel" style="width: 100%;">
+				<p1>Location</p1>
+				<span>
+					<table class="clear innerBorders" style="width: 100%;">
+						<tr>
+							<td style="text-align: right;">Country: </td>
+							<td><select class="lite">
+								<option>United States</option>
+								<option>Everywhere Else</option>
+							</select></td>
+						</tr><tr>
+							<td style="text-align: right;">State/Province:</td>
+							<td><input class="lite" type="text" name="locState" /></td>
+						</tr><tr>
+							<td style="text-align: right;">City: </td>
+							<td><input class="lite" type="text" name="locCity" /></td>
+						</tr>
+					</table>
+				</span>
+			</span>
+		</span>
+		<span style="display: block; width: 100%; padding: 4px;">
+			<span class="collapsablePanel" style="width: 100%;">
+				<p1>Other</p1>
+				<span>
+					<table class="clear innerBorders" style="width: 100%;">
+						<tr>
+							<td>Free Text</td>
+						</tr><tr>
+							<td><textarea class="lite" name="otherFreeType"></textarea></td>
+						</tr><tr>
+							<td>
+								<input class="lite" type="radio" value="paid" /> Only show paid offers<br />
+								<input class="lite" type="radio" value="volunteer" /> Only show volunteer offers<br />
+								<input class="lite" type="radio" value="both" /> Show all offers<br />
+							</td>
+						</tr>
+					</table>
+				</span>
+			</span>
+		</span>
+	</span>
+	<span class="resultsPanel" id="results"></span>
+</span>
+<script src="search.js"></script>
+<script>
+var width = staticWidth(document.getElementById("filters"));
+document.getElementById("results").style.paddingRight = (width + 16) + "px";
+</script>

@@ -1,0 +1,94 @@
+
+span.searchProjectsWrapper
+{
+	display: inline;
+	width: 100%;
+}
+span.resultsPanel
+{
+	display: inline-block;
+	background: transparent;
+	border: solid 0px #000000;
+	text-align: center;
+	width: 100%;
+	padding: 16px 16px 16px 16px;
+	margin: 0px;
+}
+span.filtersPanel
+{
+	position: fixed;
+	right: 0px;
+	display: inline-block;
+	background: transparent;
+	border: solid 0px #000000;
+	text-align: left;
+	vertical-align: top;
+	padding: 0px;
+	margin: 0px;
+}
+
+span.searchResultProject
+{
+	display: inline-block;
+	background: #F7F7F7;
+	border: solid 1px #BFDFE7;
+	border-radius: 8px;
+	color: #3F3F3F;
+	box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.5);
+	vertical-align: top;
+	text-align: left;
+	min-width: 450px;
+	width: 450px;
+	padding: 0px;
+	margin: 4px;
+}
+span.searchResultProject > span
+{
+	display: inline-block;
+	width: 100%;
+	padding: 4px;
+	margin: 0px;
+}
+span.searchResultProject > span.projectTitle
+{
+	background: #BFDFE7;
+	border-radius: 8px 8px 0px 0px;
+	font-size: 18px;
+}
+span.searchResultProject > span.projectDesc
+{
+	font-size: 14px;
+	padding-left: 24px;
+}
+span.searchResultProject > span.projectPoster
+{
+	font-size: 12px;
+}
+
+span.tagHover
+{
+	display: inline-block;
+	z-index: 3;
+	display: none;
+	position: absolute;
+	text-align: left;
+	padding: 0px;
+	margin: 0px;
+}
+
+span.tagTrashCan
+{
+	float:right;
+	display: inline-block;
+	position: relative;
+	bottom: 0px;
+	right: 0px;
+	background: url('images/tagTrashCan.png') no-repeat;
+	background-position: 0px 0px;
+	width: 64px;
+	height: 64px;
+}
+span.tagTrashCan:hover
+{
+	background-position: 100% 0px;
+}

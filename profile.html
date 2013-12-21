@@ -1,0 +1,132 @@
+
+<?php $self = ($user["uuid"] == $_COOKIE["gsUUID"]); ?>
+
+<span class="profileWrapper">
+	<span class="column center" id="center">
+		<span class="panelWrapper">
+			<?php include("lorem_ipsum_1.txt"); ?>
+		</span>
+	</span>
+	<span class="column left" id="left">
+		<span class="panelWrapper">
+			<img style="width:100%;" src="userpic/<?php echo $user["uuid"] ?>.jpg" /><br />
+			<span class="break">INFO</span>
+			<span class="username"><?php echo $user["username"]; ?></span>
+			<span class="title">
+				<?php echo htmlspecialchars($user["title"]); ?>
+				<?php if ($self) { ?>
+					<a class="compact" href="javascript:toggleEditTitle();">
+						<img src="<?php echo $STYLE_PATH; ?>/images/edit_small.png" />
+					</a>
+					<span style="position: absolute; background:white; display: none;" id="editTitle">
+							<textarea id="editTitleText"><?php echo $user["title"]; ?></textarea>
+							<a class="compact" href="javascript:saveNewTitle();">Save</a>
+						</span>
+				<?php } ?>
+			</span>
+			<br />
+			<span class="break">ACTIONS</span>
+			<?php if ($self) { ?>
+				<table class="clear" style="width: 100%;"><tr>
+					<td><a class="compact" href="">Post Project</a></td>
+					<td><a class="compact" href="">View Projects</a></td>
+				</tr><tr>
+					<td><a class="compact" href="">Edit Profile</a></td>
+					<td><a class="compact" href=""></a></td>
+				</tr></table>
+			<?php } else {?>
+				<table class="clear" style="width: 100%;"><tr>
+					<td><a class="compact" href="">Refer</a></td>
+					<td><a class="compact" href="">Invite</a></td>
+				</tr><tr>
+					<td><a class="compact" href="javascript:toggleEndorse();">Endorse</a>
+						<span style="position: absolute; background:white; display: none;" id="endorse">
+							Endorse <?php echo $user["username"]; ?>:
+							<textarea>Comments...</textarea>
+							<a class="compact" href="postEndorse('<?php echo $user['uuid'] ?>');">Post</a>
+						</span></td>
+					<td><a href="">Follow</a></td>
+				</tr></table>
+			<?php }?>
+			<br />
+			<span class="break">SKILLS</span>
+			<span class="tagSetSmall">
+			<?php if ($self) { ?>
+				<a class="compact" href="javascript:toggleEditSkills();">
+					<img src="<?php echo $STYLE_PATH; ?>/images/edit_small.png" />
+				</a>
+				<span style="position: absolute; background:white; display: none;" id="editSkills">
+					<input class="lite" type="text" id="tagSearchBar"
+							onkeydown="tagSearchChange();" onkeypress="tagSearchChange();" onblur="tagSearchBlur();" />
+					<br /><span class="searchGuessBar" style="width: inherit;" id="tagSearchBarGuess"></span>
+				</span><br />
+			<?php } ?>
+			<?php
+			if ($tags)
+				foreach ($tags as $tag)
+					echo '<span>'.$tag["title"].'</span>';
+			?></span>
+			<br />
+		</span>
+	</span>
+	<span class="column right" id="right">
+		<span class="panelWrapper">
+			<span class="break">ACTIVE PROJECTS</span>
+			<span>
+				<?php
+				if (!$postedProjects && !$respondedProjects)
+					echo $user["username"].' is not involved in any projects.';
+				if ($postedProjects) {
+					echo $user["username"].' is seeking help in '.sizeof($postedProjects).' projects.';
+					echo '<table class="lite projectList">';
+					foreach ($postedProjects as $row) {
+						echo '<tr><td>'.$row["title"].'</td></tr>';
+					}
+					echo '</table>';
+				}
+				if ($respondedProjects)
+					echo $user["username"].' is involved in '.sizeof($respondedProjects).' projects.';
+				?>
+			</span>
+			<br /><br />
+			<span class="break">FINISHED PROJECTS</span>
+			<span>
+				<?php
+				if (!$satisfiedProjects && !$completedProjects)
+					echo $user["username"].' has no archived projects.';
+				if ($satisfiedProjects)
+					echo $user["username"].' posted '.sizeof($satisfiedProjects).' projects that were completed by others.';
+				if ($completedProjects)
+					echo $user["username"].' completed '.sizeof($completedProjects).' projects for others.';
+				?>
+			</span>
+			<br /><br />
+			<span class="break">ENDORSEMENTS</span>
+			<span>
+				<?php
+				if (!$recievedEndorsements && !$postedEndorsements)
+					echo $user["username"].' has no endorsements.';
+				if ($recievedEndorsements) {
+					echo $user["username"].' has been endorsed by others '.sizeof($recievedEndorsements).' times.';
+					foreach ($recievedEndorsements as $row)
+						echo '<span>'.$row["text"].'</span>';
+				}
+				if ($postedEndorsements) {
+					echo $user["username"].' has endorsed others '.sizeof($postedEndorsements).' times.';
+					foreach ($postedEndorsements as $row)
+						echo '<span>'.$row["text"].'</span>';
+				}
+				?>
+			</span>
+		</span>
+	</span>
+</span>
+
+<script src="profile.js"></script>
+<script language="javascript">
+alignColumns(
+	document.getElementById("left"),
+	document.getElementById("center"),
+	document.getElementById("right")
+);
+</script>

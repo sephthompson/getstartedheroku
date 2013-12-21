@@ -1,0 +1,2 @@
+<div><span class="message"><span class="time"><table><tr><td>8/16</td></tr><tr><td>4:41:08</td></tr></table></span> <b><span class="name">Alan</span>: </b>E4D453EF2F5E4355B89C954EC96C2F7C</span></div>
+<div><span class="system"><b>[<span class="name">System</span>]: </b>Chat cleared.</span></div>
