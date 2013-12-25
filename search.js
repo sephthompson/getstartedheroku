@@ -1,4 +1,3 @@
-var SERVER_PATH = "./server/";
 
 function searchResponse(response) {
 	try {
@@ -19,48 +18,9 @@ function searchResponse(response) {
 		alert("An internal server error occurred. Server returned: "+response);
 	}
 }
-function tagSearchGuessResponse(response) {
-	try {
-		var data = eval("("+response+")");
-		
-		if (data.packet) {
-			var guessOutput = document.getElementById("tagSearchBarGuess");
-			if (data.packet == "SEARCH_SUCCEEDED") {
-				guessOutput.innerHTML = data.body;
-				guessOutput.style.display = "inline-block";
-				gBlurTagGuess = false;
-			}
-			else if (data.packet == "NO_RESULTS") {
-				guessOutput.innerHTML = '';
-				guessOutput.style.display = "none";
-			}
-			else if (data.packet == "SEARCH_FAILED") {
-				guessOutput.innerHTML = '';
-				guessOutput.style.display = "none";
-			}
-		}
-		defaultPacketBehavior(data);
-	}
-	catch(error) {
-		alert("An internal server error occurred. Server returned: "+response);
-	}
-}
 
 function requestSearch() {
-	ajaxRequest(SERVER_PATH+"searchProjects.php", "action=search&tags=none"+"&location=none", searchResponse);
-}
-
-function requestTagSearchGuess() {
-	var input = document.getElementById("tagSearchBar");
-	var guessOutput = document.getElementById("tagSearchBarGuess");
-	var val = input.value;
-	if (val.length == 0) {
-		guessOutput.innerHTML = '';
-		guessOutput.style.display = "none";
-	}
-	else {
-		ajaxRequest(SERVER_PATH+"searchTags.php", "action=tagSearchGuess&callback=addTag&limit=5&text="+val, tagSearchGuessResponse);
-	}
+	ajaxRequest(API_PATH+"searchProjects.php", "action=search&tags=none"+"&location=none", searchResponse);
 }
 
 var gTagHover = document.getElementById("tagHover");
@@ -129,12 +89,9 @@ function refreshTagSet() {
 }
 function addTag(uuid, title) {
 	var input = document.getElementById("tagSearchBar");
-	var guessOutput = document.getElementById("tagSearchBarGuess");
-	gTagSet.push([uuid, title]);
+	input.mBlur();
 	input.value = "";
-	guessOutput.innerHTML = '';
-	guessOutput.style.display = "none";
-	gBlurTagGuess = false;
+	gTagSet.push([uuid, title]);
 	refreshTagSet();
 	requestSearch();
 }
@@ -150,29 +107,3 @@ function removeTag(tag_id) {
 	refreshTagSet();
 }
 
-var gTimeout;
-var gBlurTagGuess = false;
-document.getElementById("tagSearchBarGuess").onmouseenter = function() {
-	gBlurTagGuess = false;
-}
-document.getElementById("tagSearchBarGuess").onmouseleave = function() {
-	gBlurTagGuess = true;
-}
-document.addEventListener("mousedown", function() {
-	if (gBlurTagGuess) {
-		var guessOutput = document.getElementById("tagSearchBarGuess");
-		guessOutput.innerHTML = '';
-		guessOutput.style.display = "none";
-	}
-});
-function tagSearchChange() {
-	clearTimeout(gTimeout);
-	gTimeout = setTimeout(requestTagSearchGuess, 500);
-}
-function tagSearchBlur() {
-	if (gBlurTagGuess) {
-		var guessOutput = document.getElementById("tagSearchBarGuess");
-		guessOutput.innerHTML = '';
-		guessOutput.style.display = "none";
-	}
-}

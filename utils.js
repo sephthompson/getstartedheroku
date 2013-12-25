@@ -97,8 +97,8 @@ function defaultPacketBehavior(data) {
 	}
 	if (data.packet) {
 		if (data.packet == "SESSION_INVALID") {
-			alert("Your session is invalid, so you have been logged out. Please login again.");
-			document.location.reload();
+			// alert("Your session is invalid, so you have been logged out. Please login again.");
+			// document.location.reload();
 		}
 		if (data.packet == "DATABASE_UNAVAILABLE") {
 			alert("Unable to access the database.");

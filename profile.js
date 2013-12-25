@@ -18,50 +18,21 @@ function profileResponse(response) {
 	}
 }
 
-var gBlurTagGuess = false;
-
-function tagSearchGuessResponse(response) {
-	try {
-		var data = eval("("+response+")");
-		
-		if (data.packet) {
-			var guessOutput = document.getElementById("tagSearchBarGuess");
-			if (data.packet == "SEARCH_SUCCEEDED") {
-				guessOutput.innerHTML = data.body;
-				guessOutput.style.display = "inline-block";
-				gBlurTagGuess = false;
-			}
-			else if (data.packet == "NO_RESULTS") {
-				guessOutput.innerHTML = '<var>No results</var>';
-				guessOutput.style.display = "inline-block";
-				gBlurTagGuess = false;
-				// guessOutput.innerHTML = '';
-				// guessOutput.style.display = "none";
-			}
-			else if (data.packet == "SEARCH_FAILED") {
-				guessOutput.innerHTML = '<var>Search failed</var>';
-				guessOutput.style.display = "inline-block";
-				gBlurTagGuess = false;
-				// guessOutput.innerHTML = '';
-				// guessOutput.style.display = "none";
-			}
-		}
-		defaultPacketBehavior(data);
-	}
-	catch(error) {
-		alert("An internal server error occurred. Server returned: "+response);
-	}
-}
-
-
 // Self
+
+function tagSelected(uuid, name) {
+	var input = document.getElementById("tagSearchBar");
+	input.mBlur();
+	input.value = "";
+	alert("Add tag: "+name+" uuid["+uuid+"]");
+}
 
 function toggleEditTitle() {
 	toggleElement("editTitle");
 }
 function saveNewTitle() {
-	var title = document.getElementById("editTitleText").value;
-	ajaxRequest("./server/profile.php", "action=editTitle&title="+title, profileResponse);
+	var title = encodeURIComponent(document.getElementById("editTitleText").value);
+	ajaxRequest(API_PATH+"profile.php", "action=editTitle&title="+title, profileResponse);
 	toggleElement("editTitle");
 }
 
@@ -75,5 +46,6 @@ function toggleEndorse() {
 	toggleElement("endorse");
 }
 function postEndorse(uuid) {
-	
+	var text = document.getElementById("endorseText").value;
+	ajaxRequest(API_PATH+"profile.php", "action=postEndorsement&subject="+uuid+"&text="+text, profileResponse);
 }

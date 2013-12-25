@@ -1,3 +1,6 @@
+
+<script src="widgets/tagSearch.js"></script>
+
 <span class="tagSet tagHover" unselectable="on" id="tagHover"></span>
 
 <span class="searchProjectsWrapper">
@@ -8,13 +11,16 @@
 				<span>
 					<table class="clear innerBorders" style="width: 100%;">
 						<tr><td>
-							<input class="lite" style="width: 100%;" type="text" id="tagSearchBar" onkeydown="tagSearchChange();" onkeypress="tagSearchChange();" onblur="tagSearchBlur();" />
-							<br /><span class="searchGuessBar" style="width: inherit;" id="tagSearchBarGuess"></span>
+							<input class="lite" style="width: 100%;" type="text" id="tagSearchBar" />
+							<br /><span class="searchGuessBar" style="width: inherit;" id="tagSearchGuesses"></span>
 						</td></tr><tr><td>
 							<span class="tagTrashCan" onMouseOver="tagDeleteOver();" onMouseOut="tagDeleteOut();"></span>
 							<span class="tagSet" id="tagSet">&nbsp;</span>
 						</td></tr>
 					</table>
+					<script>
+						createTagSearch("tagSearchBar", "tagSearchGuesses", 1000, 5, "addTag");
+					</script>
 				</span>
 			</span>
 		</span>

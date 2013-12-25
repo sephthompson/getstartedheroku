@@ -3,7 +3,7 @@
 	<span class="projectDesc"><?php echo $row["description"]; ?></span>
 	<span class="projectPoster">By
 		<?php echo '<a href="?p=profile&user='.$poster["uuid"].'">'.$poster["username"].'</a>'; ?>
-		<?php echo date_format(date_create($row["date_posted"]), "Y-m-d"); ?>
+		<?php echo shortTime($row["time_posted"]); ?>
 	</span>
 	<span class="tagSet">
 <?php if ($tags) {

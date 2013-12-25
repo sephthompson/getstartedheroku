@@ -68,11 +68,8 @@ a.icon:active			{background-position: 0px 100%;}
 
 span.shortcutIconsPanel
 {
-	z-index: 3;
-	position: absolute;
-	background: #FFFFFF;
-	border: solid 1px #BFBFBF;
-	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+	top: 64px;
+	right: 0px;
 	line-height: 0px;
 	font-size: 0px;
 	padding: 2px;

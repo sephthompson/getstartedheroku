@@ -1,4 +1,3 @@
-var SERVER_PATH = "./server/";
 
 var gShortcutIcons = document.getElementById("shortcutIconsPanel");
 gShortcutIcons.style.position = "absolute";

@@ -81,6 +81,8 @@ span.title
 
 table.projectList
 {
+	word-break: break-all;
+	word-wrap: break-word;
 	color: #3F3FBF;
 	font-size: 12px;
 	width: 100%;
@@ -88,4 +90,25 @@ table.projectList
 table.projectList td
 {
 	padding: 6px;
+}
+
+table.endorsementList
+{
+	border-collapse: separate;
+	border-spacing: 0px 4px;
+	border: 0px solid transparent;
+	background: transparent;
+	word-break: break-all;
+	word-wrap: break-word;
+	color: #3F3F3F;
+	font-size: 13px;
+	width: 100%;
+	
+}
+table.endorsementList td
+{
+	border: 1px solid #BFBFBF;
+	border-radius: 4px;
+	background: #FFFFFF;
+	padding: 4px;
 }

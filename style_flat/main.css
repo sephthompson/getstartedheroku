@@ -122,6 +122,37 @@ input.lite:focus, textarea.lite:focus, select.lite:focus
 	background: #FFFFCF;
 	background: linear-gradient(to bottom, rgb(250, 250, 200) 0%, rgb(220, 220, 170) 100%);
 }
+
+input.compact, textarea.compact, select.compact
+{
+	display: inline-block;
+	background: #EFEFEF;
+	background: linear-gradient(to bottom, rgb(220, 220, 220) 0%, rgb(250, 250, 250) 100%);
+	border: solid 1px #5F5F5F;
+	border-radius: 0px;
+	color: #5F5F5F;
+	font-family: Helvetica;
+	font-size: 13px;
+	text-align: left;
+	padding: 2px;
+	margin: 1px;
+}
+input.compact[type="button"]
+{
+	background: #EFEFEF;
+	background: linear-gradient(to top, rgb(220, 220, 220) 0%, rgb(250, 250, 250) 100%);
+}
+input.compact:hover, textarea.compact:hover, select.compact:hover
+{
+	background: #FFFFCF;
+	background: linear-gradient(to bottom, rgb(250, 250, 250) 0%, rgb(230, 230, 230) 100%);
+}
+input.compact:focus, textarea.compact:focus, select.compact:focus
+{
+	background: #FFFFCF;
+	background: linear-gradient(to bottom, rgb(250, 250, 250) 0%, rgb(220, 220, 220) 100%);
+}
+
 input.clear
 {
 	background: transparent;
@@ -184,31 +215,6 @@ table.innerBorders td, th
 {
 	border: solid 1px #DFEFFF;
 	padding: 4px;
-}
-
-span.searchGuessBar
-{
-	position: absolute;
-	z-index: 2;
-	display: none;
-	background: #EFEFEF;
-	background: linear-gradient(to bottom, rgb(230, 230, 230) 0%, rgb(255, 255, 255) 100%);
-	border: solid 1px #7F7F7F;
-	border-radius: 8px;
-	padding: 2px;
-}
-span.searchGuessBar > a
-{
-	display: block;
-	color: inherit;
-	text-decoration: inherit;
-	width: 100%;
-	padding: 2px;
-}
-span.searchGuessBar > a:hover
-{
-	background: #FFFFCF;
-	background: linear-gradient(to bottom, rgb(250, 250, 200) 0%, rgb(230, 230, 170) 100%);
 }
 
 span.roundBorder

@@ -1,0 +1,29 @@
+<?php
+$db = new GsDatabase();
+if ($db->gsConnect()) {
+	$loggedin = sessionValid($db);
+	if (!$loggedin) { ?>
+		<span style="width: 100%; height: 100%; text-align: center; padding: 32px;">
+			<span class="roundBorder">
+				<table class="roundCollapsed">
+					<tr><td>Username:</td><td><input class="clearInput" type="text" id="regUser" /></td></tr>
+					<tr><td>Password:</td><td><input class="clearInput" type="text" id="regPass1" /></td></tr>
+					<tr><td>Password (repeat):</td><td><input class="clearInput" type="text" id="regPass2" /></td></tr>
+					<tr><td>Email:</td><td><input class="clearInput" type="text" id="regEmail" /></td></tr>
+					<tr><th colspan="2">
+						<center><input class="clearInput" type="button" value="Register" onClick="registerSubmit();" /></center>
+					</th></tr>
+				</table>
+			</span>
+			<br /><br />
+			<span id="output" style="font-size: 18px; text-weight: bold;"></span>
+		</span>
+		<script src="register.js"></script>
+		<?php
+		$db->close();
+	}
+	else {
+		echo 'You are already logged in.';
+	}
+}
+?>

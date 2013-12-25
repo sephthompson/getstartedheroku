@@ -1,6 +1,9 @@
 
 <?php $self = ($user["uuid"] == $_COOKIE["gsUUID"]); ?>
 
+<script src="widgets/popupFrame.js"></script>
+<script src="widgets/tagSearch.js"></script>
+
 <span class="profileWrapper">
 	<span class="column center" id="center">
 		<span class="panelWrapper">
@@ -13,15 +16,14 @@
 			<span class="break">INFO</span>
 			<span class="username"><?php echo $user["username"]; ?></span>
 			<span class="title">
-				<?php echo htmlspecialchars($user["title"]); ?>
+				<?php echo '<span style="white-space: pre;">'.htmlspecialchars($user["title"]).'</span>'; ?>
 				<?php if ($self) { ?>
-					<a class="compact" href="javascript:toggleEditTitle();">
-						<img src="<?php echo $STYLE_PATH; ?>/images/edit_small.png" />
-					</a>
-					<span style="position: absolute; background:white; display: none;" id="editTitle">
-							<textarea id="editTitleText"><?php echo $user["title"]; ?></textarea>
-							<a class="compact" href="javascript:saveNewTitle();">Save</a>
-						</span>
+					<a class="compact" id="editTitleBtn"><img src="<?php echo $STYLE_PATH; ?>/images/edit_small.png" /></a>
+					<span class="popupFrame" id="editTitle">
+						<textarea id="editTitleText"><?php echo $user["title"]; ?></textarea>
+						<a class="compact" href="javascript:saveNewTitle();">Save</a>
+					</span>
+					<script> createPopupFrame("editTitleBtn", "editTitle"); </script>
 				<?php } ?>
 			</span>
 			<br />
@@ -34,45 +36,46 @@
 					<td><a class="compact" href="">Edit Profile</a></td>
 					<td><a class="compact" href=""></a></td>
 				</tr></table>
-			<?php } else {?>
+			<?php }
+			else { ?>
 				<table class="clear" style="width: 100%;"><tr>
 					<td><a class="compact" href="">Refer</a></td>
 					<td><a class="compact" href="">Invite</a></td>
 				</tr><tr>
-					<td><a class="compact" href="javascript:toggleEndorse();">Endorse</a>
-						<span style="position: absolute; background:white; display: none;" id="endorse">
+					<td><a class="compact" id="endorseBtn">Endorse</a>
+						<span class="popupFrame" id="endorse">
 							Endorse <?php echo $user["username"]; ?>:
-							<textarea>Comments...</textarea>
-							<a class="compact" href="postEndorse('<?php echo $user['uuid'] ?>');">Post</a>
-						</span></td>
-					<td><a href="">Follow</a></td>
+							<textarea id="endorseText">Comments...</textarea>
+							<a class="compact" href="javascript:postEndorse('<?php echo $user['uuid'] ?>');">Post</a>
+						</span>
+						<script> createPopupFrame("endorseBtn", "endorse"); </script></td>
+					<td><a class="compact" href="">Follow</a></td>
 				</tr></table>
-			<?php }?>
+			<?php } ?>
 			<br />
 			<span class="break">SKILLS</span>
-			<span class="tagSetSmall">
 			<?php if ($self) { ?>
-				<a class="compact" href="javascript:toggleEditSkills();">
-					<img src="<?php echo $STYLE_PATH; ?>/images/edit_small.png" />
-				</a>
-				<span style="position: absolute; background:white; display: none;" id="editSkills">
-					<input class="lite" type="text" id="tagSearchBar"
-							onkeydown="tagSearchChange();" onkeypress="tagSearchChange();" onblur="tagSearchBlur();" />
-					<br /><span class="searchGuessBar" style="width: inherit;" id="tagSearchBarGuess"></span>
-				</span><br />
+				<a class="compact" id="editSkillsBtn"><img src="<?php echo $STYLE_PATH; ?>/images/edit_small.png" /></a>
+				<span class="popupFrame" id="editSkills">
+					<input class="compact" style="width: 256px;" type="text" id="tagSearchBar" />
+					<br /><span class="searchGuessBar" style="width: 256px;" id="tagSearchGuesses"></span>
+				</span>
+				<script> createTagSearch("tagSearchBar", "tagSearchGuesses", 1000, 5, "tagSelected"); </script>
+				<script> createPopupFrame("editSkillsBtn", "editSkills"); </script>
+				<br />
 			<?php } ?>
-			<?php
-			if ($tags)
-				foreach ($tags as $tag)
-					echo '<span>'.$tag["title"].'</span>';
-			?></span>
+			<span class="tagSetSmall">
+			<?php if ($tags)
+					foreach ($tags as $tag)
+						echo '<span>'.$tag["title"].'</span>'; ?>
+			</span>
 			<br />
 		</span>
 	</span>
 	<span class="column right" id="right">
 		<span class="panelWrapper">
 			<span class="break">ACTIVE PROJECTS</span>
-			<span>
+			<span style="width: 100%;">
 				<?php
 				if (!$postedProjects && !$respondedProjects)
 					echo $user["username"].' is not involved in any projects.';
@@ -90,7 +93,7 @@
 			</span>
 			<br /><br />
 			<span class="break">FINISHED PROJECTS</span>
-			<span>
+			<span style="width: 100%;">
 				<?php
 				if (!$satisfiedProjects && !$completedProjects)
 					echo $user["username"].' has no archived projects.';
@@ -102,26 +105,73 @@
 			</span>
 			<br /><br />
 			<span class="break">ENDORSEMENTS</span>
-			<span>
+			<span style="width: 100%;">
 				<?php
 				if (!$recievedEndorsements && !$postedEndorsements)
 					echo $user["username"].' has no endorsements.';
 				if ($recievedEndorsements) {
 					echo $user["username"].' has been endorsed by others '.sizeof($recievedEndorsements).' times.';
-					foreach ($recievedEndorsements as $row)
-						echo '<span>'.$row["text"].'</span>';
+					echo '<table class="endorsementList">';
+					foreach ($recievedEndorsements as $row) {
+						$poster = $db->fetchAccount($row["poster_id"]); ?>
+						<tr><td>
+							<?php if ($uuid == $row["poster_id"] || $uuid == $row["subject_id"]) { ?>
+							<span style="display: inline-block; float: right;">
+								<a class="icon" style="
+									width:17px; height:17px;
+									background-image: url('<?php echo $STYLE_PATH; ?>/images/x_16.png');">
+								</a>
+							</span>
+							<?php } ?>
+							by <a href="?p=profile&user=<?php echo $poster["username"]; ?>">
+								<?php echo $poster["username"]; ?>
+							</a> <?php echo shortTime($row["time_posted"]); ?>
+							<br /><?php echo $row["text"]; ?>
+						</td></tr>
+					<?php }
+					echo '</table>';
 				}
-				if ($postedEndorsements) {
-					echo $user["username"].' has endorsed others '.sizeof($postedEndorsements).' times.';
-					foreach ($postedEndorsements as $row)
-						echo '<span>'.$row["text"].'</span>';
-				}
-				?>
+				if ($postedEndorsements) { ?>
+					<?php if ($self) { ?>
+						<span class="popupFrame" id="deleteEndorsement" style="
+							position: fixed;
+							left: 50%;
+							top: 50%;
+							width: 256px;">
+							<span id="deleteEndorsementPreview"></span>
+							<br />
+							<br />Are you sure you want to delete this endorsement? This cannot be undone.
+							<br />
+							<input type="button" value="Delete" /><input type="button" value="Cancel" />
+						</span>
+					<?php } ?>
+					<?php echo $user["username"].' has endorsed others '.sizeof($postedEndorsements).' times.'; ?>
+					<table class="endorsementList">
+					<?php foreach ($postedEndorsements as $row) {
+						$subject = $db->fetchAccount($row["subject_id"]); ?>
+						<tr><td>
+							<?php if ($uuid == $row["poster_id"] || $uuid == $row["subject_id"]) { ?>
+							<span style="display: inline-block; float: right;">
+								<a class="icon" id="deleteEndorsementBtn<?php echo $row["uuid"]; ?>" style="
+									width:17px; height:17px;
+									background-image: url('<?php echo $STYLE_PATH; ?>/images/x_16.png');">
+								</a>
+								<script>
+								createPopupFrame("deleteEndorsementBtn<?php echo $row["uuid"]; ?>", "deleteEndorsement"); </script>
+							</span>
+							<?php } ?>
+							to <a href="?p=profile&user=<?php echo $subject["username"]; ?>">
+								<?php echo $subject["username"]; ?>
+							</a> <?php echo shortTime($row["time_posted"]); ?>
+							<br /><?php echo $row["text"]; ?>
+						</td></tr>
+					<?php } ?>
+					</table>
+				<?php } ?>
 			</span>
 		</span>
 	</span>
-</span>
-
+</span>
 <script src="profile.js"></script>
 <script language="javascript">
 alignColumns(

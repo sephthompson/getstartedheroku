@@ -1,15 +1,16 @@
 <?php include('config.php'); ?>
-<?php include('server/GsDatabase.php'); ?>
-<?php include('server/Template.php'); ?>
+<?php include('api/utils.php'); ?>
+<?php include('api/GsDatabase.php'); ?>
 
 <!DOCTYPE html>
 
 <html>
 <head>
-	<?php include($STYLE_PATH."/stylesheets.html"); ?>
+	<?php include($STYLE_PATH."/stylesheets.php"); ?>
+	<script language="javascript" src="api/ajax.js"></script>
+	<script language="javascript" src="config.js"></script>
 	<script language="javascript" src="utils.js"></script>
-	<script language="javascript" src="server/ajax.js"></script>
-	<script language="javascript" src="server/login.js"></script>
+	<script language="javascript" src="login.js"></script>
 </head>
 <body>
 	<?php include('shortcutBar.html'); ?>
